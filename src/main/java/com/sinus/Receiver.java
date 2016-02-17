@@ -1,17 +1,11 @@
 package com.sinus;
 
-import org.springframework.jms.annotation.JmsListener;
-import org.springframework.stereotype.Component;
-
 import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by sinus on 09.02.16.
  */
-@Component
 public class Receiver {
-
-
     private CountDownLatch latch = new CountDownLatch(1);
 
     public void receiveMessage(String message) {
@@ -21,12 +15,6 @@ public class Receiver {
 
     public void receiveMessageExtra(String message) {
         System.out.println("Received EXTRA <"+message+">");
-        latch.countDown();
-    }
-
-    @JmsListener(destination = "sinus", containerFactory = "jmsListenerContainerFactory")
-    public void receiveMessageActiveMQ(String message) {
-        System.out.println("Received <" + message + ">");
         latch.countDown();
     }
 
